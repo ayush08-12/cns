@@ -1,0 +1,59 @@
+
+import java.util.Scanner; 
+public class Bellman {
+private int d[];
+private int n;
+public static final int MAX= 9999;
+public static void main(String[] args) {
+int n=0,s;
+Scanner scanner = new Scanner(System.in);
+System.out.println("Enter the number of vertices");
+n = scanner.nextInt();
+int a[][] = new int[n][n];
+System.out.println("Enter the adjacency matrix");
+for (int i = 0; i < n; i++)
+{
+for (int j = 0; j < n; j++)
+{
+a[i][j] = scanner.nextInt();
+if (a[i][j] == 0)
+{
+a[i][j] = MAX;
+}
+}
+}
+System.out.println("Enter the source vertex");
+s = scanner.nextInt(); Bellman b= new Bellman(n);
+b.Bellmanford(s,a);
+scanner.close();
+}
+public Bellman(int n)
+{
+this.n = n;
+d = new int[n + 1];
+}
+public void Bellmanford(int s, int a[][])
+{
+for (int i = 0; i < n; i++)
+{
+d[i] = MAX;
+}
+d[s] = 0;
+for (int k = 0; k < n - 1; k++)
+{ for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        { if (a[i][j] != MAX)
+        { if (d[j] > d[i]+ a[i][j])
+        { d[j] = d[i]+ a[i][j];
+        }
+        }
+        }
+        }
+        }
+        for (int i = 0; i <n; i++)
+        {
+        System.out.println("distance of source " + s + " to "+ i + " is " + d[i]);
+        }
+        }
+        }
